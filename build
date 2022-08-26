@@ -1,25 +1,18 @@
 #!/usr/bin/env bash
 
+if [ -f ./.env ]; then
+    source ./.env
+fi
+
 if [ $# -gt 0 ]; then
 
-    if [ "$1" == "test" ]; then
+    if [ "$1" == "migrations" ]; then
         shift 1
-        COMMAND="./vendor/bin/pest $@ --parallel"
-
-    elif [ "$1" == "coverage" ]; then
-        shift 1
-        COMMAND="./vendor/bin/pest $@ --coverage --parallel"
+        COMMAND="./vendor/bin/doctrine-migrations $@ --configuration ./src/Config/migrations.php --db-configuration ./src/Config/database.php"
 
     elif [ "$1" == "serve" ]; then
         shift 1
-        docker run -it --rm \
-            -u $(id -u):$(id -g) \
-            -p 8000:8000 \
-            -v $PWD:/app \
-            -w /app \
-            tombenevides/xdebug-php:v8.1 php -S 0.0.0.0:8000 public/index.php
-
-        exit 0
+        COMMAND="php -S 0.0.0.0:8000 public/index.php"
 
     else
         COMMAND="$@"
@@ -33,4 +26,5 @@ docker run -it --rm \
     -u $(id -u):$(id -g) \
     -v $PWD:/app \
     -w /app \
+    --add-host=host.docker.internal:host-gateway \
     tombenevides/xdebug-php:v8.1 $COMMAND

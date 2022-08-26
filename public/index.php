@@ -2,8 +2,13 @@
 
 require __DIR__.'/../vendor/autoload.php';
 
-use Root\App\Core\Kernel;
-use Root\App\Core\Request;
+use Api\App\Core\Kernel;
+use Api\App\Core\Request\Request;
+use Dotenv\Dotenv;
+
+// //Load env variables
+$dotenv = Dotenv::createImmutable(__DIR__.'/..');
+$dotenv->safeLoad();
 
 //create a kernel instance
 $kernel = new Kernel();
@@ -11,5 +16,5 @@ $kernel = new Kernel();
 //handle the request
 $response = $kernel->handle((new Request)->capture());
 
-//return the response and terminate the application
-$kernel->close($response);
+//return the response
+$kernel->send($response);

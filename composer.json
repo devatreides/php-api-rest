@@ -5,7 +5,7 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Root\\App\\": "src/"
+            "Api\\": "src/"
         }
     },
     "authors": [
@@ -14,5 +14,14 @@
             "email": "eltonfelixbenevidees@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "php": "^8.1",
+        "doctrine/dbal": "^3.4",
+        "doctrine/orm": "^2.13",
+        "symfony/cache": "^6.1",
+        "vlucas/phpdotenv": "^5.4",
+        "doctrine/migrations": "^3.5",
+        "robthree/twofactorauth": "^1.8",
+        "firebase/php-jwt": "^6.3"
+    }
 }
