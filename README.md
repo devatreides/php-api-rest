@@ -21,7 +21,7 @@
 If you want to use docker, you can make use of the `build` script in the root of the project. It will run simplier commands to up the server:
 
 - `./build composer install` to install the dependencies
-- `./build migrations migrate` to run the migrations
+- `./build migrations migrate` to run the migrations (Change host value in `./src/Config/database.php` to `host.docker.internal`)
 - `./build serve` to up the server
 
 p.s. The `build` script will only run the application in container. To run the migrations, you need to have the database up and running.
